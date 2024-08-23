@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q14</title>
+</head>
+<body>
+    <script>
+        let char = prompt('Enter the one character');
+        let vowels = ['a', 'i', 'o','u','e'];
+        function checkVowel(char){
+            if(typeof char !== 'string'){
+                alert('given char isnt a char')
+                return;
+            }else if(char.length > 1){
+                alert('please do not give a string');
+                return;
+            }
+            for(let i = 0 ; i< vowels.length; i++){
+                if(vowels[i] == char){
+                    alert('given char is a vowel');
+                    return;
+                }
+            }
+            alert('given char isnt a vowel')
+        }
+        checkVowel(char);
+    </script>
+</body>
+</html>

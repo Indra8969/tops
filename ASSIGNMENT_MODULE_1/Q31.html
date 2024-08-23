@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q31</title>
+</head>
+<body>
+    <p id="day"></p>
+    <p id="time"></p>
+    <button id="refresh">refresh</button>
+    <script>
+
+        let dayElem = document.querySelector('#day');
+        let timeElem = document.querySelector('#time');
+        let refreshElem = document.querySelector('#refresh');
+
+        function get(){
+            var dateObj = new Date();
+            let map = {
+                0: 'Sunday',
+                1: 'Monday',
+                2: 'Tuesday',
+                3: 'Wednesday',
+                4: 'Thursday',
+                5: 'Friday',
+                6: 'Saturday',
+            }
+            var day = map[dateObj.getDay()];
+            var Hour = dateObj.getHours();
+            var Mins = dateObj.getMinutes();
+            var Secs = dateObj.getSeconds();
+            return {day, Hour, Mins, Secs}
+        }
+        
+        function display(detls){
+            dayElem.innerText = `Today is ${detls.day}`
+            timeElem.innerText = `Current time is ${detls.Hour % 12} ${detls.Hour < 12 ? "AM" : "PM"} ${detls.Mins} Minutes and ${detls.Secs} Seconds`
+        }
+        refreshElem.addEventListener('click',() =>{
+            display(get())
+        })
+        display(get());
+
+        setInterval(() => {
+            display(get())
+        }, 10000);
+    </script>
+</body>
+</html>

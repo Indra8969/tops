@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q53</title>
+    <style>
+        button{
+            all: unset;
+            border: 1px solid black;
+            padding: 5px 10px;
+            background-color: white;
+        }
+        #answerContainer{
+            display: flex;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div><h2>Maths Operations</h2></div>
+        <div>
+            <form>
+                <label for="first">Enter 1st Number : </label>
+                <input autofocus type="number" id="first" required>
+                <label for="second">Enter 2st Number : </label>
+                <input type="number" id="second" required>
+            </form>
+        </div>
+        <div>
+            <div>
+                <button>+</button>
+                <button>-</button>
+                <button>*</button>
+                <button>/</button>
+                <button>%</button>
+            </div>
+            <div id="answerContainer">
+               <h5>Answer is : </h5>
+               <h5 id="Answer"></h5> 
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let operator = ""
+        let firstInput = document.querySelector('#first');
+        let secondInput = document.querySelector('#second');
+        let btns = document.querySelectorAll('button');
+        let form = document.querySelector('form');
+        let answerElem = document.querySelector('#Answer');
+
+        btns.forEach(btn=>{
+            btn.addEventListener('click',()=>{
+                operator = btn.innerText;
+                showAns();
+            })
+        })
+        
+        function showAns(){
+            let str = `${firstInput.value}${operator}${secondInput.value}`;
+            console.log(str)
+            answerElem.innerText = eval(str);
+        }
+
+    </script>
+</body>
+</html>

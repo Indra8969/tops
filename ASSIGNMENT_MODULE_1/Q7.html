@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q7</title>
+    <!-- WAP to conver year to days and vice versa -->
+     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgb(48, 48, 48);
+        }
+        form{
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            margin-inline: auto;
+        }
+        input[type="submit"]{
+            height: 40px;
+            border-radius: 20px;
+            border: 0;
+            background-color: white;
+            color: black;
+        }
+        input[type="number"], select{
+            all: unset;
+            height: 40px;
+            border-radius: 20px;
+            border: 0;
+            background-color: white;
+            color: black;
+            padding: 0px 10px;
+            display: flex;
+            align-items: center;
+        }
+        h4{
+            color: white;
+        }
+     </style>
+</head>
+<body>
+    <form>
+        <input type="number" placeholder="Enter value..." required>
+        <select>
+            <option value="year">Convert Days to Years</option>
+            <option value="day">Convert Years to Days</option>
+        </select>
+        <input type="submit" name="" id="">
+        <h4></h4>
+    </form>
+    <script>
+        var form_elem = document.querySelector('form');
+        var input_elem = document.querySelector('input');
+        var select = document.querySelector('select');
+        var h4_elem = document.querySelector('h4');
+
+        function convert(to, num){
+            if(to == 'year'){
+                return num / 365;
+            }else{
+                return num * 365;
+            }
+        }
+
+        form_elem.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            const converted = convert(select.value, input_elem.value).toFixed(3);
+            h4_elem.innerText = `${input_elem.value} is equal to ${converted} ${select.value}`;
+        })
+
+    </script>
+</body>
+</html>

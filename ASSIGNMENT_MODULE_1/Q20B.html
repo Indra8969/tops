@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q20</title>
+</head>
+<body>
+    <form id="form">
+        <label for="char"> Enter character : </label>
+        <input type="text" name="char" id="char" maxlength="1" autofocus required>
+        <p id="output"></p>
+        <input type="submit" name="" id="">
+    </form>
+    <script>
+        let char;
+        let vowels = ['a','e','i','o','u'];
+        document.querySelector('#form').addEventListener('submit',(e)=>{
+            e.preventDefault();
+            char = document.querySelector('#char').value;
+            document.querySelector('#char').value = '';
+            show();
+        })
+
+        function checkVowel(char){
+            for(let i = 0 ; i < vowels.length; i++){
+                if(vowels[i] == char){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function show(){
+
+            switch(checkVowel(char)) {
+                case true:
+                    document.querySelector('p').innerText = `${char} is a vowel`;
+                    break;
+                case false:
+                    document.querySelector('p').innerText = `${char} is not a vowel`;
+                    break;
+            }
+
+        }
+
+    </script>
+</body>
+</html>

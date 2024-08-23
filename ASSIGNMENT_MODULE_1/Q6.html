@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q6</title>
+    <!-- 
+        Q6. Find the curcumference of rectangle.
+    -->
+</head>
+<body>
+    <button>retry</button>
+    <br>
+    <script>
+        var height = prompt("Enter the height of the rectangle");
+        var width = prompt("Enter the width of the rectangle");
+        var res = (width *2) + (height *2);
+        document.write(`Curcumference of rectangle is ${res}`);
+        document.querySelector('button').addEventListener('click',()=>{
+            location.reload();
+        })
+    </script>
+</body>
+</html>

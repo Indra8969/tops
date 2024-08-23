@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q45</title>
+</head>
+<body>
+    <script>
+        //type of event in js 
+        //1. click event 
+        document.addEventListener('click', ()=>{
+            console.log('clicked in the document')
+        })
+        //2. mouseover : fired when the mouse pointer in moved onto an element
+        document.addEventListener('mouseover', ()=>{
+            console.log('mouse moved')
+        })
+        //3. mouseout : fired when mouse pointer is moved out of an element
+        document.addEventListener('mouseout', ()=>{
+            console.log('mouse out')
+        })
+        //4. mouseout : fired when mouse pointer is moved out of an element
+        document.addEventListener('mousedown', ()=>{
+            console.log('mouse down')
+        })
+        //5. mouseout :
+        document.addEventListener('mouseup', ()=>{
+            console.log('mouse up')
+        })
+        //6. mouseout : 
+        document.addEventListener('keydown', ()=>{
+            console.log('key down')
+        })
+        //7. mouseout : 
+        document.addEventListener('keypress', ()=>{
+            console.log('key presed')
+        })
+        //8. mouseout : 
+        document.addEventListener('keyup', ()=>{
+            console.log('key up')
+        })
+        //9. mouseout : 
+        document.addEventListener('keyup', ()=>{
+            console.log('key up')
+        })
+
+        /*
+            FORM EVENTS
+                submit: Fired when a form is submitted.
+                change: Fired when the value of an input element changes.
+                input: Fired when the value of an input element changes (more responsive than change).
+                focus: Fired when an element gains focus.
+                blur: Fired when an element loses focus.
+                reset: Fired when a form is reset
+
+            WINDOW EVENTS
+
+                load: Fired when the entire page has loaded, including all dependent resources such as stylesheets and images.
+                resize: Fired when the browser window is resized.
+                scroll: Fired when the document is scrolled.
+                unload: Fired when the document or a child resource is being unloaded.
+
+            FOCUS EVENTS
+                focus: Fired when an element gains focus.
+                blur: Fired when an element loses focus.
+                focusin: Similar to focus, but bubbles.
+                focusout: Similar to blur, but bubbles.
+
+            TOUCH EVENTS
+                touchstart: Fired when a touch point is placed on the touch surface.
+                touchmove: Fired when a touch point is moved along the touch surface.
+                touchend: Fired when a touch point is removed from the touch surface.
+                touchcancel: Fired when a touch event is interrupted
+            
+            DRAG EVENTS
+                dragstart: Fired when the user starts dragging an element.
+                drag: Fired when an element is being dragged.
+                dragend: Fired when the user releases the dragged element.
+                dragenter: Fired when a dragged element enters a valid drop target.
+                dragover: Fired when a dragged element is over a valid drop target.
+                dragleave: Fired when a dragged element leaves a valid drop target.
+                drop: Fired when a dragged element is dropped on a valid drop target
+        */
+
+        /*
+            COMMONN SYNTAX OF ADDING EVENT
+
+            element.addEventListener('eventnamme', callbackFn)
+
+        */
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q3</title>
+    <!-- //write a program to fring the area of the triangle -->
+</head>
+<body>
+    <script>
+        var base = prompt('enter base of triangle');
+        var height = prompt('enter the height of triangle');
+        function findAreaOfTriangle(base, height){
+            var area = (base * height)/2
+            return area;
+        }
+
+        var res = findAreaOfTriangle(base,height);
+
+        document.write(`
+            <b>Area of triangle is : </b>
+            ${res}
+        `)
+
+    </script>
+</body>
+</html>

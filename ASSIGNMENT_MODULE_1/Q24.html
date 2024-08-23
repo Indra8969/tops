@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q24</title>
+</head>
+<body>
+    <script>
+        let target = prompt('Enter the ceil value for the fibonacci series');
+        function fibonacci(target, i = 0){
+            console.log(Number(target))
+            if(isNaN(target)) return 'Please enter a Number not a string';
+            let pre1 = 1, pre2 = 2;
+            let series = [1,2];
+            let generated = false
+            while(!generated){
+                if(pre1 + pre2 > target) break;
+                series.push(pre1 + pre2);
+                let temp = pre2;
+                pre2 = pre1 + pre2;
+                pre1 = temp; 
+            }
+            return series;
+        }
+        document.write("fibonacci seires : ", fibonacci(target));
+    </script>
+</body>
+</html>

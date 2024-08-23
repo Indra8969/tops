@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q19</title>
+</head>
+<body>
+    <script>
+        //9Write to find the largest of three numbers in JS?
+        let arr = [623462346,9999232345,2345234423];
+        function findMax(arr){
+            let max = arr[0];
+            for(let i = 0; i < arr.length - 1; i++){
+                if(arr[i + 1] > max) max = arr[i + 1];
+            }
+            alert('max num is : ' + max);
+        }
+        findMax(arr);
+    </script>
+</body>
+</html>

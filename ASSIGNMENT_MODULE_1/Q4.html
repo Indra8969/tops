@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q4</title>
+    <!-- write a js program to calculate the dats left until next christmas
+ -->
+    <style>
+        form, section{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-inline: auto;
+            min-width: 200px;
+            max-width: 400px;
+        }
+        input[type="date"]{
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid grey;
+            padding: 5px 20px;
+        }
+        input[type="submit"]{
+            width: 100px;
+            height: 40px;
+            background-color: rgb(0, 0, 0);
+            color: white;
+            border: 1px solid grey;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body> 
+    <form>
+        <label for="first">First Date</label>
+        <input type="date" value="" id="first" required>
+        <label for="second">Second Date</label>
+        <input type="date" id="second" required>
+        <input type="submit">
+    </form>
+    <section>
+        <h4></h4>
+    </section>
+    <script>
+        var allInput = document.querySelectorAll('input');
+        var formElem = document.querySelector('form');
+        var h4_elem = document.querySelector('h4');
+
+        var firstInput = allInput[0];
+        var secondInput = allInput[1];
+        formElem.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            var first_val = firstInput.value.split('-');
+            var second_val = secondInput.value.split('-');
+            
+            var diffOfYear = Math.abs(second_val[0] - first_val[0]);
+            var diffOfMonth = Math.abs(second_val[1] - first_val[1]);
+            var diffOfDay = Math.abs(second_val[2] - first_val[2]);
+
+            h4_elem.innerText = `${diffOfYear} Years, ${diffOfMonth} Months, and ${diffOfDay} Days`
+        });
+    </script>
+</body>
+</html>

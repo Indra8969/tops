@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q25</title>
+</head>
+<body>
+    <script>
+        //Q25 print number in a revese order
+        var inp = prompt('enter the number');
+
+        function revNumber(num){
+            let str = num.toString();
+            let revstr = '';
+            for(let i = str.length -1; i >= 0; i--){
+                revstr += str[i];
+            };
+            if(isNaN(revstr)) return 'Not a Number';
+            return revstr;
+        }
+        document.write(revNumber(inp));
+    </script>
+</body>
+</html>

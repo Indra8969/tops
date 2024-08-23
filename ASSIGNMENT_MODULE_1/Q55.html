@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q55</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        .container{
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .container div:nth-child(1){
+            height: 75vh;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .container div button{
+            all: unset;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: hsl(0, 0%, 81%);
+        }
+        .container div button span{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box{
+            min-width: 200px;
+            max-height: 200px;
+            aspect-ratio: 1;
+            background-color: rgb(126, 142, 156);
+            transition: transform .2s linear;
+        }
+        .focus{
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <div class="boxContainer">
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box focus"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+            <div>
+                <button><span class="material-symbols-outlined">chevron_left</span></button>
+                <button><span class="material-symbols-outlined">chevron_right</span></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let scroll = 0;
+        let btns = document.querySelectorAll('button');
+        let boxContainer = document.querySelector('.boxContainer');
+        let boxes = document.querySelectorAll('.box');
+
+        let scrollWidth = boxes.length - 1 * boxes[0]
+
+        function scrollRight(){
+            scroll += boxes[0].getBoundingClientRect().width + 20;
+            boxes.forEach((box, i)=>{
+                box.style.transform = `translate(${scroll}px, 0)`
+            })
+        }
+        
+        function scrollLeft(){
+            scroll -= boxes[0].getBoundingClientRect().width - 20;
+            boxes.forEach((box, i)=>{
+                box.style.transform = `translate(${scroll}px, 0)`
+            })
+        }
+
+        btns.forEach((btn,index)=>{
+            btn.addEventListener('click',()=>{
+                index ? scrollRight() : scrollLeft();
+            })
+        })
+
+    </script>
+</body>
+</html>

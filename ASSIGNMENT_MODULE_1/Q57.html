@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q56</title>
+</head>
+<body>
+    <div class="container">
+        <input type="password">
+        <input type="checkbox" id="check">
+        <label for="check">show password</label>
+    </div>
+    <script>
+        let check = document.querySelector('#check');
+        let input = document.querySelector('input');
+
+        check.addEventListener('change', (e)=>{
+            e.target.checked ? input.type = "text" : input.type = "password";
+        })
+
+    </script>
+</body>
+</html>

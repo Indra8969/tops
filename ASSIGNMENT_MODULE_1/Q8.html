@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q8</title>
+    <!-- Convert fahrenheit to the celsius ? (conditinal logic question)  -->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgb(48, 48, 48);
+        }
+        form{
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            margin-inline: auto;
+        }
+        input[type="submit"]{
+            height: 40px;
+            width: 100px;
+            border-radius: 20px;
+            border: 0;
+            background-color: white;
+            color: black;
+        }
+        input[type="number"], select{
+            all: unset;
+            height: 40px;
+            border-radius: 20px;
+            border: 0;
+            background-color: white;
+            color: black;
+            padding: 0px 10px;
+            display: flex;
+            align-items: center;
+        }
+        h3{
+            color: white;
+        }
+     </style>
+</head>
+<body>
+    <form>
+        <input type="number" placeholder="convert celsius to fahrenheit" required>
+        <select>
+            <option value="c to f">celsius to fahrenheit</option>
+            <option value="f to c">fahrenheit to celsius</option>
+        </select>
+        <input type="submit">
+        <h3 id="res"></h3>
+    </form>
+    <script>
+        var form_elem = document.querySelector('form');
+        var input_elem = document.querySelector('input');
+        var select_elem = document.querySelector('select');
+        var res_elem = document.querySelector('#res');
+
+        function convert(to, value){
+            if (to === "c to f") {
+                return (9 / 5) * value + 32;
+            } else if (to === "f to c") {
+                return (5 / 9) * (value - 32);
+            }
+        }
+
+        form_elem.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            var res = convert(select_elem.value, input_elem.value).toFixed(3);
+            res_elem.innerText = `${input_elem.value} ${(select_elem.value == "c to f") ? "Celsius" : "Fahrenheit"} is equal to the ${res} ${(select_elem.value == "c to f") ? "Fahrenheit" : "Celsius"}`
+        });
+
+        select_elem.addEventListener('change',(e)=>{
+            (e.target.value == 'c to f') ? input_elem.placeholder = "convert celsius to fahrenheit": input_elem.placeholder = "convert fahrenheit to celsius";
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+        input {
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="myForm">
+        <label for="username">Username :</label>
+        <input type="text" id="username" name="username">
+        <span class="error" id="usernameError">Username must be at least 3 25 characters long.</span>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <span class="error" id="emailError">Please enter a valid email address.</span>
+
+        <label for="password">Password (min 8 characters):</label>
+        <input type="password" id="password" name="password">
+        <span class="error" id="passwordError">Password must be at least 8 characters long.</span>
+        
+        <label for="confirm">Confirm Password :</label>
+        <input type="password" id="confirm" name="password">
+        <span class="error" id="confirmerr">Password must be same.</span>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+
+            document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+
+            const username = document.getElementById('username').value;
+            if (!(25 > username.length && username.length > 3)) {
+                document.getElementById('usernameError').style.display = 'block';
+                isValid = false;
+            }
+
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,6}$/i;
+            if (!emailPattern.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+
+            const password = document.getElementById('password').value;
+            if (password.length < 8) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            }
+            
+            const confirm = document.getElementById('confirm').value;
+            if (confirm !== password) {
+                document.getElementById('confirmerr').style.display = 'block';
+                isValid = false;
+            }
+
+            if(isValid) alert('loggein')
+
+        });
+    </script>
+
+</body>
+</html>

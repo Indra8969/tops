@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q54</title>
+    <style>
+        .container{
+            max-width: 260px;
+            display: flex;
+            gap: 30px;
+            flex-direction: column;
+            border: 1px solid black;
+            padding: 20px;
+            width: max-content;
+            margin-inline: auto;
+        }
+        #inputContainer span{
+            display: flex;
+            padding: 5px;
+        }
+        #inputContainer label{
+            flex-grow: 1;
+        }
+        .resultContainer div h5{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <h3>Marksheet for Information Technology</h3>
+            <p>Enter Marks</p>
+        </div>
+        <div id="inputContainer">
+            <form>
+                <span>
+                    <label>C Lang : </label><input type="number" class="subMarks">
+                </span>
+                <span>
+                    <label>Cpp Lang : </label><input type="number" class="subMarks">
+                </span>
+                <span>
+                    <label>Database : </label><input type="number" class="subMarks">
+                </span>
+                <span>
+                    <label>HTML : </label><input type="number" class="subMarks">
+                </span>
+                <span>
+                    <label>CSS : </label><input type="number" class="subMarks">
+                </span>
+                <span>
+                    <label>php : </label><input type="number" class="subMarks">
+                </span>
+                <span>
+                    <label>Core java : </label><input type="number" class="subMarks">
+                </span>
+                <div>
+                    <button type="submit">Result</button>
+                </div>
+            </form>
+        </div>
+        <div class="resultContainer">
+            <div>
+                <h5>Total Is : </h5>
+                <h5 id="total"></h5>
+            </div>
+            <div>
+                <h5>Percentage Is : </h5>
+                <h5 id="Percentage"></h5>
+            </div>
+        </div>
+    </div>
+        <script>
+
+            let inputElems = document.querySelectorAll('.subMarks');
+            let outOfElem = document.querySelector('#outof');
+            let form = document.querySelector('form');
+            let totalElem = document.querySelector('#total');
+            let percentageElem = document.querySelector('#Percentage');
+
+            form.addEventListener('submit', (e)=>{
+                e.preventDefault();
+                let grandTotal = inputElems.length * 50;
+                totalElem.innerText = grandTotal;
+                let Total = 0;
+                inputElems.forEach(elem =>{
+                    Total += Number(elem.value)
+                });
+                alert(Total)
+                percentageElem.innerText = ((Total / grandTotal ) * 100).toFixed(3) + "%";
+            })
+
+        </script>
+</body>
+</html>

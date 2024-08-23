@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q37</title>
+</head>
+<body>
+    <script>
+        function cloneArr(arr){
+            if(!Array.isArray(arr)) throw new Error('given data is not an array');
+            let newArr
+            return newArr = [...arr];
+        }
+        let me = [4234,34,34,43,242,4,2,4323,4];
+        console.log(cloneArr(me))
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q30</title>
+</head>
+<body>
+    <script>
+        let nums = [];
+        let i = 0
+        while(i < 3){
+            nums[i] = prompt('enter Number');
+            i++;
+        }
+
+        function isPalindrome(num){
+            if(!num) return false;
+            const strNum = num.toString();
+            const reversedStrNum = strNum.split('').reverse().join('');
+            return strNum === reversedStrNum;
+        }
+
+        let res = new Array(3);
+        
+        nums.forEach((num,index)=> {
+            res[index] = isPalindrome(num);
+        })
+        document.write(res);
+    </script>
+</body>
+</html>

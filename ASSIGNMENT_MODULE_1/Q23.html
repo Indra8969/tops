@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q23</title>
+</head>
+<body>
+    <form>
+        <input type="number" placeholder="Enter Number">
+        <p id="result"></p>
+        <input type="submit">
+    </form>
+    <script>
+        var inp = document.querySelector('input');
+        var res = document.querySelector('#result');
+        var form = document.querySelector('form');
+
+        function factorial(num){
+            if(num < 1) return 'not a valid input';
+            if(num == 1 ) return 1;
+            return num * factorial(num-1);
+        }
+
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            var ans = factorial(Number(inp.value));
+            res.innerText = ans;
+        });
+    </script>
+</body>
+</html>

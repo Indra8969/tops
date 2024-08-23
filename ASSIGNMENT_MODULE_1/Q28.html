@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q28</title>
+</head>
+<body>
+    <script>
+        let str = ''
+        for(let i = 1; i < 6; i++){
+            for(let j = 1; j < 6; j++){
+                str += ' '
+                if(j < 4){
+                    if(j == 2){
+                        str += 1;
+                        continue;
+                    }
+                    str += i;
+                }else{
+                    str += Math.pow(i, j - 2);
+                }
+            }
+            str += '\n';
+        }
+        console.log(str)
+    </script>
+</body>
+</html>
