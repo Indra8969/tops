@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main {
+            min-height: 100dvh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px; 
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); 
+            gap: 2px;
+        }
+        .row {
+            display: contents; 
+        }
+        .row .col:nth-child(1){
+            min-width: 200px;
+        }
+        .col {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        .col input{
+            border-radius: 15px;
+            text-align: center;
+            border: 0;
+            background-color: rgb(209, 209, 209);
+            width: 100%;
+            height: 30px;
+        }
+        .header {
+            background-color: #333;
+            color: black;
+            font-weight: bold;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <div class="row header">
+                <div class="col">Product info</div>
+                <div class="col">Quantity</div>
+                <div class="col">Price (Per Unit)</div>
+                <div class="col">Price (SubTotal)</div>
+                <div class="col"></div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Fortunata Window Hardwaree - Decorative Holdbacks - Mocha
+                </div>
+                <div class="col">
+                    <input type="number" min="0" placeholder="Qt">
+                </div>
+                <div class="col">
+                    <p class="ppu" price="19.99">$29.99</p>
+                </div>
+                <div class="col">
+                    <p class="psu"></p>
+                </div>
+                <div class="col">
+                    <button class="remove">Remove</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Woven Treillis Windos Hardware Clip Rings Bronze
+                </div>
+                <div class="col">
+                    <input type="number" min="0" placeholder="Qt">
+                </div>
+                <div class="col">
+                    <p class="ppu" price="19.99">$19.99</p>
+                </div>
+                <div class="col">
+                    <p class="psu"></p>
+                </div>
+                <div class="col">
+                    <button class="remove">Remove</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col">
+                    <p class="total"></p>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let inputs = document.querySelectorAll('input');
+        let psus = document.querySelectorAll('.psu');
+        let ppus = document.querySelectorAll('.ppu');
+        let totalElm = document.querySelector('.total');
+        let removeBtns = document.querySelectorAll('.remove');
+        let rows = document.querySelectorAll('.row');
+
+        function countTotal(){
+            let total = 0;
+            psus.forEach((item)=>{
+                let str = item.innerText
+                let price = Number(str.substring(1, str.length));
+                total += price;
+            })
+            return total.toFixed(2);
+        }
+
+        inputs.forEach((element, i) => {
+            element.addEventListener('change',(e)=>{
+                let price = ppus[i].innerText;
+                console.log(price)
+                psus[i].innerText = '$' + (Number(price.substring(1,price.length)) * Number(e.target.value)).toFixed(2);
+                totalElm.innerText = "$" + countTotal();
+            })
+        });
+
+        removeBtns.forEach((element, i) => {
+            element.addEventListener('click',()=>{
+                console.log(rows[i+1])
+                rows[i + 1].remove();
+                
+                totalElm.innerText = "$" + countTotal();
+            })
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q10</title>
+    <style>
+        .container input{
+            height: 40px;
+            padding: 0 10px;
+            max-width: 200px;
+        }
+        #delay{
+            width:40px;
+            text-align: center;
+        }
+        .outputDiv{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="container">
+            <input type="text" id="text" placeholder="Text...">
+            <input type="number" id="delay" placeholder="delay" value="300">
+            <div class="outputDiv">
+                <h3>You Typed : &nbsp</h3>
+                <h3 id="output"></h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let delayElm = document.querySelector('#delay');
+        let textElm = document.querySelector('#text');
+        let outputElm = document.querySelector('#output');
+
+        let timeout;
+
+        textElm.addEventListener('keydown',(e)=>{
+            clearTimeout(timeout);
+            timeout = setTimeout(()=>{
+                outputElm.innerText = e.target.value
+            },Number(delayElm.value));
+        })
+
+    </script>
+</body>
+</html>

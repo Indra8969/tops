@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <title>Q7</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100dvh;
+        background-color: blue;
+      }
+      .container {
+        min-width: 320px;
+        width: 80vw;
+        max-width: 400px;
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 7px;
+      }
+      #author {
+        text-align: right;
+      }
+      #qoute {
+        text-align: center;
+      }
+      #head {
+        text-align: center;
+      }
+      .container .bottom {
+        display: flex;
+        justify-content: space-between;
+      }
+      .container .bottom .bottomleft {
+        display: flex;
+        gap: 10px;
+      }
+      .action {
+        height: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .action span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        border-radius: 50%;
+        aspect-ratio: 1;
+        border: 1px solid black;
+        font-size: 20px;
+      }
+      .action:hover {
+        background-color: rgb(224, 224, 224);
+        scale: 1.02;
+      }
+      .bottom button {
+        cursor: pointer;
+        all: unset;
+        height: 100%;
+        background-color: navy;
+        color: white;
+        border-radius: 40px;
+        padding-inline: 12.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h3 id="head">Quote of the Day</h3>
+      <p id="qoute"></p>
+      <p id="author"></p>
+      <hr />
+      <div class="bottom">
+        <div class="bottomleft">
+          <div class="action">
+            <span class="material-symbols-outlined">volume_up</span>
+          </div>
+          <div class="action">
+            <span class="material-symbols-outlined" id="copyBtn">content_copy</span>
+          </div>
+          <div class="action">
+            <span class="material-symbols-outlined">share</span>
+          </div>
+        </div>
+        <div class="bottomright">
+          <button id="newqoute">New Qoute</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const qoutes = [
+        {
+          quote:
+            "The only limit to our realization of tomorrow is our doubts of today.",
+          author: "Franklin D. Roosevelt",
+        },
+        {
+          quote:
+            "Success is not the key to happiness. Happiness is the key to success.",
+          author: "Albert Schweitzer",
+        },
+        {
+          quote: "In the middle of difficulty lies opportunity.",
+          author: "Albert Einstein",
+        },
+        {
+          quote: "Don’t watch the clock; do what it does. Keep going.",
+          author: "Sam Levenson",
+        },
+        {
+          quote:
+            "The future belongs to those who believe in the beauty of their dreams.",
+          author: "Eleanor Roosevelt",
+        },
+        {
+          quote:
+            "It does not matter how slowly you go as long as you do not stop.",
+          author: "Confucius",
+        },
+        {
+          quote: "Believe you can and you’re halfway there.",
+          author: "Theodore Roosevelt",
+        },
+        {
+          quote:
+            "Your time is limited, so don’t waste it living someone else’s life.",
+          author: "Steve Jobs",
+        },
+        {
+          quote:
+            "Hardships often prepare ordinary people for an extraordinary destiny.",
+          author: "C.S. Lewis",
+        },
+        {
+          quote:
+            "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+          author: "Winston Churchill",
+        },
+        {
+          quote:
+            "I can’t change the direction of the wind, but I can adjust my sails to always reach my destination.",
+          author: "Jimmy Dean",
+        },
+        {
+          quote:
+            "It’s not whether you get knocked down, it’s whether you get up.",
+          author: "Vince Lombardi",
+        },
+        {
+          quote:
+            "What you get by achieving your goals is not as important as what you become by achieving your goals.",
+          author: "Zig Ziglar",
+        },
+        {
+          quote: "The way to get started is to quit talking and begin doing.",
+          author: "Walt Disney",
+        },
+        {
+          quote: "Don’t be afraid to give up the good to go for the great.",
+          author: "John D. Rockefeller",
+        },
+        {
+          quote: "The only way to do great work is to love what you do.",
+          author: "Steve Jobs",
+        },
+        {
+          quote: "Life is 10% what happens to us and 90% how we react to it.",
+          author: "Charles R. Swindoll",
+        },
+        {
+          quote:
+            "You are never too old to set another goal or to dream a new dream.",
+          author: "C.S. Lewis",
+        },
+        {
+          quote:
+            "The pessimist sees difficulty in every opportunity. The optimist sees opportunity in every difficulty.",
+          author: "Winston Churchill",
+        },
+        {
+          quote: "You miss 100% of the shots you don’t take.",
+          author: "Wayne Gretzky",
+        },
+        {
+          quote:
+            "If you want to achieve greatness, stop asking for permission.",
+          author: "Anonymous",
+        },
+        {
+          quote: "You only live once, but if you do it right, once is enough.",
+          author: "Mae West",
+        },
+        {
+          quote:
+            "Success usually comes to those who are too busy to be looking for it.",
+          author: "Henry David Thoreau",
+        },
+        {
+          quote: "The best way to predict the future is to create it.",
+          author: "Peter Drucker",
+        },
+        {
+          quote: "Opportunities don't happen. You create them.",
+          author: "Chris Grosser",
+        },
+        {
+          quote:
+            "Failure will never overtake me if my determination to succeed is strong enough.",
+          author: "Og Mandino",
+        },
+        {
+          quote: "Don't let yesterday take up too much of today.",
+          author: "Will Rogers",
+        },
+        {
+          quote:
+            "It's not the years in your life that count. It's the life in your years.",
+          author: "Abraham Lincoln",
+        },
+        { quote: "Dream big and dare to fail.", author: "Norman Vaughan" },
+        {
+          quote: "It always seems impossible until it’s done.",
+          author: "Nelson Mandela",
+        },
+      ];
+
+      let randomQoute = getRandQoute();
+
+      function getRandQoute() {
+        let rand = Math.floor(Math.random() * qoutes.length);
+        return qoutes[rand];
+      }
+
+      function update() {
+        document.querySelector("#qoute").innerText = `"` + randomQoute.quote + `"`;
+        document.querySelector("#author").innerText = "--" + randomQoute.author;
+      }
+
+      document.querySelector("button").addEventListener("click", () => {
+        randomQoute = getRandQoute();
+        update();
+      });
+
+     document.querySelector('#copyBtn').addEventListener("click",()=>{
+        navigator.clipboard.writeText(randomQoute.quote);
+        alert("copied")
+     });     
+
+      update();
+    </script>
+  </body>
+</html>

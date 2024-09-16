@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Q11</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .floatingWindow {
+        width: 100%;
+        padding: 10px;
+        text-align: left;
+      }
+      input {
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Mouse coordinates : &nbsp</h2>
+      <h2 id="cords"></h2>
+      <label for="delay">Delay (ms) : </label>
+      <input type="number" id="delay" value="1000" />
+    </div>
+
+    <script>
+      let cordsElm = document.querySelector("#cords");
+      let prevTime = new Date().getTime();
+
+        let delay = 1000;
+
+        document.querySelector('#delay').addEventListener("keyup",(e)=>{
+            delay = Number(e.target.value);
+        });
+
+      document.addEventListener("mousemove", (e) => {
+        if (new Date().getTime() - prevTime < delay) return;
+        cordsElm.innerText = `X : ${e.clientX}, Y : ${e.clientY}`;
+        prevTime = new Date().getTime();
+      });
+    </script>
+  </body>
+</html>

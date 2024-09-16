@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <title>Q4</title>
+    <style>
+      body {
+        background-color: aliceblue;
+      }
+      #emailForm div {
+        display: flex;
+        gap: 0px;
+        align-items: center;
+        width: fit-content;
+        padding: 10px;
+        border-radius: 3px;
+        margin-inline: auto;
+      }
+      #emailForm div div input {
+        all: unset;
+        background-color: white;
+      }
+      #emailForm div div {
+        background-color: white;
+      }
+      div div span {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="emailForm">
+      <div>
+        <div>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Enter You Email"
+          />
+          <span class="material-symbols-outlined">mail</span>
+        </div>
+      </div>
+    </form>
+
+    <script>
+      document.querySelector("input").addEventListener("keyup", function (e) {
+        e.preventDefault();
+        const emailInput = document.getElementById("email").value;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        console.log(e.target.value)
+        if (!emailPattern.test(emailInput)) {
+          document.querySelector("span").innerText = "mail";
+          document.querySelector("span").style.color = "red";
+        } else {
+          document.querySelector("span").style.color = "seagreen";
+          document.querySelector("span").innerText = "check_circle";
+        }
+        if(e.target.value == ''){
+            console.log('empty')
+            document.querySelector("span").innerText = "mail";
+            document.querySelector("span").style.color = "black";
+        } 
+      });
+    </script>
+  </body>
+</html>

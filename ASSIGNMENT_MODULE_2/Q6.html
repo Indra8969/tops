@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <title>Q6</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .app {
+        padding: 20px;
+      }
+      .container {
+        width: 360px;
+        min-width: 320px;
+        margin-inline: auto;
+        padding: 15px;
+        background-color: rgb(230, 230, 230);
+        border-radius: 5px;
+      }
+      .container form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .container .inputContainer {
+        background-color: white;
+        width: 100%;
+        display: flex;
+        border: 1.6px solid grey;
+        gap: 10px;
+      }
+      img{
+        width: 200px;
+        margin-inline: auto;
+        border-radius: 5px;
+      }
+      .container .inputContainer input {
+        all: unset;
+        flex-grow: 1;
+        height: 35px;
+        padding-left: 10px;
+      }
+      .container .inputContainer span {
+        height: 35px;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+      }
+      .indicatorCon {
+        display: grid;
+        gap: 10px;
+      }
+      .indicator {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+      }
+      .box {
+        height: 10px;
+        border-radius: 5px;
+        background-color: grey;
+      }
+      .weak{
+        background-color: red;
+      }
+      .moderate{
+        background-color: orange;
+      }
+      .strong{
+        background-color: green;
+      }
+      .container h3,
+      h4 {
+        text-align: center;
+      }
+      .passvis{
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="container">
+        <form>
+          <h3>Password Strength Indocator in HTML CSS & Javascript</h3>
+          <div class="inputContainer">
+            <input type="password" placeholder="Enter Password" />
+            <span class="material-symbols-outlined passvis">visibility</span>
+          </div>
+          <div class="indicatorCon">
+            <div class="indicator">
+              <div class="box"></div>
+              <div class="box"></div>
+              <div class="box"></div>
+            </div>
+            <h4 class="indicatorText"></h4>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+
+        let indicatorBoxRefs = document.querySelectorAll('.box');
+        let inputRef = document.querySelector('input');
+        let indicatorTextRef = document.querySelector('.indicatorText');
+
+        document.querySelector('.passvis').addEventListener('click',(e)=>{
+            if(inputRef.type == 'password'){
+                inputRef.type = 'text';
+                e.target.innerText = 'visibility_off'
+            }else{
+                inputRef.type = 'password';
+                e.target.innerText = 'visibility'
+
+            }
+        });
+
+        function resetStrenth(){
+            let calsses = ['weak', 'moderate', 'strong']
+            indicatorBoxRefs.forEach((element,i) => {
+                element.classList.remove(calsses[i]);
+            });
+        }
+
+        function handleKeyup(e){
+            resetStrenth();
+            console.log(indicatorTextRef)
+            if(e.target.value == '') return indicatorTextRef.innerText = ''
+            let strength = checkPasswordStrength(e.target.value)
+            if(strength == 'Weak'){
+                indicatorBoxRefs[0].classList.add('weak');
+            }else if(strength == 'Moderate'){
+                indicatorBoxRefs[0].classList.add('weak');
+                indicatorBoxRefs[1].classList.add('moderate');
+                
+            }else{
+                indicatorBoxRefs[0].classList.add('weak');
+                indicatorBoxRefs[1].classList.add('moderate');
+                indicatorBoxRefs[2].classList.add('strong');
+            }
+            indicatorTextRef.innerText = `Your Password is ${strength}`
+        }
+        
+        let dbTimeout;
+        inputRef.addEventListener('keyup',(e)=>{
+            clearTimeout(dbTimeout);
+            dbTimeout = setTimeout(()=>{
+                handleKeyup(e)
+            }, 350);
+        })
+
+      function checkPasswordStrength(password) {
+        let strength = 0;
+
+        if (password.length >= 8) strength++;
+
+        if (/[a-z]/.test(password)) strength++;
+
+        if (/[A-Z]/.test(password)) strength++;
+
+        if (/[0-9]/.test(password)) strength++;
+
+        if (/[\W_]/.test(password)) strength++;
+
+        if (strength <= 2) return "Weak";
+        if (strength === 3) return "Moderate";
+        if (strength > 3) return "Strong";
+      }
+
+    </script>
+  </body>
+</html>

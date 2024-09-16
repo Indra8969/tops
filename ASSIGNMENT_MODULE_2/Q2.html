@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>q2</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: aqua;
+        }
+        .container{
+            background-color: white;
+            border-radius: 4px;
+            margin-inline: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 400px;
+            margin-top: 30px;
+        }
+        .container div {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .container div input{
+            all: unset;
+            border: 1px solid grey;
+            padding: 10px;
+        }
+        .err{
+            display: none;
+            color: brown;
+        }
+        button{
+            height: 40px;
+            background-color: green;
+            color: white;
+            border-radius: 3px;
+        }
+        select{
+            padding-inline: 10px;
+            height: 40px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <form>
+
+            <h2>Form validation</h2>
+            <div>
+                <label for="fname">Full Name</label>
+                <input class="errInput" type="text" id="fname" required placeholder="Indra Suthar">
+            </div>
+        <div>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required placeholder="indrasuthar@gmail.com">
+        </div>
+        <div>
+            <label for="pass">Password</label>
+            <input type="password" id="pass" placeholder="Enter your password" required>
+            <p id="passErr" class="err">Enter you password</p>
+        </div>
+        <div>
+            <label for="dob">Birth Date</label>
+            <input type="date" id="dob" required>
+            <p id="birthErr" class="err">Select you date of birth</p>
+        </div>
+        <div>
+            <label for="gender">Gender</label>
+            <select name="gender" id="gender" required>
+                <option value="" selected hidden>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="noneBinary">None Binary</option>
+            </select>
+            <p id="genderErr" class="err">Select you gender</p>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    </div>
+    
+    <script>
+        document.querySelector('form').addEventListener('submit',(e)=>{
+            e.preventDefault();
+            let inputs = document.querySelectorAll('input');
+            inputs.forEach((item)=>{
+                if(item.value == ""){
+                    item.style.backgroundColor = 'rgb(251,193,193)';
+                }
+                setTimeout(() => {
+                    item.style.backgroundColor = 'white';
+                }, 2000);
+                console.log(item)
+            })
+        })
+    </script>
+</body>
+</html>

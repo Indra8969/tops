@@ -1,0 +1,96 @@
+*{
+  margin: 0;
+  padding: 0px;
+}
+#root{
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+
+}
+.container{
+  min-width: 270px;
+  max-width: 600px;
+  width: 80%;
+  margin-inline: auto;
+  padding: 20px;
+  box-shadow: 0px 0px 40px rgba(0,0,0,0.12);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.container h3{
+  text-align: center;
+}
+.container .tasks{
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  overflow-y: auto;
+  gap: 10px;
+}
+.container .task{
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 0px;
+  gap: 10px;
+}
+.container .task label{
+  flex-grow: 1;
+}
+.container .task svg{
+  cursor: pointer;
+  flex-grow: 0;
+}
+.addContainer{
+  max-width: 300px;
+}
+.addContainer, .editContainer, .deleteContainer{
+  height: 35px;
+  display: flex;
+  margin-inline: auto;
+  align-items: center;
+  background-color: white;
+}
+.addContainer input, 
+.editContainer button, 
+.editContainer input,
+.deleteContainer button{
+  all: unset;
+  height: 100%;
+  flex-grow: 1;
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 5px 10px;
+}
+.editContainer{
+  min-width: 100%;
+}
+.editContainer input:focus{
+  border: 2px solid green;
+
+}
+.editContainer input{
+  background-color: white;
+  flex-grow: 1;
+}
+.editContainer button{
+  background-color: black;
+  color: white;
+  flex-grow: 0;
+}
+.addContainer button{
+  height: 100%;
+  padding: 5px 10px;
+  height: 100%;
+  background-color: navy;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  color: white;
+}

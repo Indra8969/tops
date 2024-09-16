@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Q9</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .app {
+        min-width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        background-color: rgb(59, 59, 190);
+        padding: 0 20px;
+        overflow-x: auto;
+      }
+      .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 7px;
+        margin-inline: auto;
+      }
+      .container form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .container h1 {
+        text-align: center;
+      }
+      .input {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .input input {
+        height: 40px;
+        padding: 0 10px;
+      }
+      .tofrom {
+        display: flex;
+        gap: 20px;
+      }
+      .tofrom svg {
+        height: 130%;
+      }
+      .tofrom .left,
+      .tofrom .right {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .tofrom select {
+        height: 40px;
+        width: 100px;
+        padding: 0 10px;
+      }
+      button {
+        all: unset;
+        text-align: center;
+        background-color: rgb(59, 59, 190);
+        color: white;
+        border-radius: 5px;
+        height: 40px;
+        padding: 0 10px;
+      }
+      .output {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="container">
+        <form>
+          <h1>Currency Coverter</h1>
+          <div class="input">
+            <label for="amount">Enter Amount</label>
+            <input type="number" placeholder="Enter Amount" />
+          </div>
+          <div class="tofrom">
+            <div class="left">
+              <label for="from">From</label>
+              <select name="form" id="from">
+                <option value="USD" selected>USD</option>
+                <option value="INR">Indian Rupee</option>
+                <option value="EUR">Euro</option>
+                <option value="GBP">British Pound</option>
+                <option value="JPY">Japanese Yen</option>
+              </select>
+            </div>
+            <div class="mid">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#000"
+              >
+                <path
+                  d="M280-160 80-360l200-200 56 57-103 103h287v80H233l103 103-56 57Zm400-240-56-57 103-103H440v-80h287L624-743l56-57 200 200-200 200Z"
+                />
+              </svg>
+            </div>
+            <div class="right">
+              <label for="to">From</label>
+              <select name="to" id="to">
+                <option value="USD">USD</option>
+                <option value="INR" selected>Indian Rupee</option>
+                <option value="EUR">Euro</option>
+                <option value="GBP">British Pound</option>
+                <option value="JPY">Japanese Yen</option>
+              </select>
+            </div>
+          </div>
+          <h4 class="output"></h4>
+          <button type="submit">Get Exchange Rate</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const currencyRates = {
+        USD: {
+          USD: 1,
+          INR: 82.75, // 1 USD = 82.75 INR
+          EUR: 0.92, // 1 USD = 0.92 EUR
+          GBP: 0.8, // 1 USD = 0.80 GBP
+          JPY: 146.45, // 1 USD = 146.45 JPY
+        },
+        INR: {
+          INR: 1,
+          USD: 0.012, // 1 INR = 0.012 USD
+          EUR: 0.011, // 1 INR = 0.011 EUR
+          GBP: 0.0097, // 1 INR = 0.0097 GBP
+          JPY: 1.77, // 1 INR = 1.77 JPY
+        },
+        EUR: {
+          EUR: 1,
+          USD: 1.09, // 1 EUR = 1.09 USD
+          INR: 90.0, // 1 EUR = 90.0 INR
+          GBP: 0.87, // 1 EUR = 0.87 GBP
+          JPY: 159.78, // 1 EUR = 159.78 JPY
+        },
+        GBP: {
+          GBP: 1,
+          USD: 1.25, // 1 GBP = 1.25 USD
+          INR: 103.0, // 1 GBP = 103.0 INR
+          EUR: 1.15, // 1 GBP = 1.15 EUR
+          JPY: 184.0, // 1 GBP = 184.0 JPY
+        },
+        JPY: {
+          JPY: 1,
+          USD: 0.0068, // 1 JPY = 0.0068 USD
+          INR: 0.56, // 1 JPY = 0.56 INR
+          EUR: 0.0063, // 1 JPY = 0.0063 EUR
+          GBP: 0.0054, // 1 JPY = 0.0054 GBP
+        },
+      };
+      let input = document.querySelector(".input > input");
+      let form = document.querySelector("form");
+      let output = document.querySelector(".output");
+      let from = "USD";
+      let to = "INR";
+
+      document.querySelector("#from").addEventListener("change", (e) => {
+        from = e.target.value;
+        convert();
+      });
+
+      document.querySelector("#to").addEventListener("change", (e) => {
+        to = e.target.value;
+        convert();
+      });
+
+      input.addEventListener("keyup", (e) => {
+        convert();
+        if (e.target.value == "") output.innerText = "";
+      });
+
+      function convert() {
+        if (input.value == "") return;
+        output.innerText = `${input.value} ${from} = ${(
+          input.value * currencyRates[from][to]
+        ).toFixed(2)} ${to}`;
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        convert();
+      });
+    </script>
+  </body>
+</html>
