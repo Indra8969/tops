@@ -5,26 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Digital Alarm Clock</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin-top: 50px;
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
       }
-      #clock {
-        font-size: 2em;
-        margin-bottom: 20px;
+      .container{
+        min-width: 100vw;
+        min-height: 100dvh;
+        align-content: center;
+        background-color: aliceblue;
       }
-      #alarm-form {
-        margin-top: 20px;
+      .wrapper{
+        background-color: white;
+        box-shadow: 0px 0px 40px rgb(0,0,0,0.07);
+        width: fit-content;
+        margin-inline: auto;
+        padding: 30px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .wrapper img{
+        width: 100px;
+      }
+      .wrapper #clock{
+        font-size: 30px;
+        font-weight: 400;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .wrapper #alarm-form{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 200px;
+      }
+      #alarm-form input,
+      #alarm-form button{
+        height: 40px;
+        all: unset;
+        background-color: navy;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+      }
+      #alarm-form input{
+        border: 1px solid black;
+        background-color: white;
+        color: black;
       }
     </style>
   </head>
   <body>
-    <div id="clock">--:--:--</div>
-
-    <div id="alarm-form">
-      <input type="time" id="alarm-time" />
-      <button onclick="setAlarm()">Set Alarm</button>
+    <div class="container">
+      <div class="wrapper">
+        <img src="https://cdn-icons-png.flaticon.com/512/2997/2997985.png" alt="alrrm clock">
+        <div id="clock">--:--:--</div>
+        <div id="alarm-form">
+          <input type="time" id="alarm-time" />
+          <button onclick="setAlarm()">Set Alarm</button>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -60,7 +105,7 @@
             }
           }, getTimeUntilAlarm());
         }
-        alert("Alarm Set")
+        alert("Alarm Set");
       }
 
       function getCurrentTime() {
@@ -84,7 +129,7 @@
       }
 
       function triggerAlarm() {
-        if(isRingedOnce) return;
+        if (isRingedOnce) return;
         if (Notification.permission === "granted") {
           new Notification("Alarm Clock", {
             body: "Time is up!",

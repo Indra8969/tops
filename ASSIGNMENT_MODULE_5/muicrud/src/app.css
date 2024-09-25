@@ -1,0 +1,14 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.container{
+    width: 100%;
+    max-width: 800px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0px 20px;
+}

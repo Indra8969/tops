@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .main {
+        height: 100dvh;
+        width: 100vw;
+        background-color: aliceblue;
+        padding: 20px;
+      }
+      .container {
+        background-color: white;
+        max-width: 700px;
+        margin-inline: auto;
+        padding: 25px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.15);
+        gap: 15px;
+        display: flex;
+        display: flex;
+        flex-direction: column;
+      }
+      .container #editor {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      .container #editor #editorleft {
+        flex-grow: 0.5;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      #image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: rotatex(0deg) rotateY(0deg);
+      }
+      #editorleft #controls {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: 1fr 1fr;
+        gap: 10px;
+      }
+      .control {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        border: 1px solid black;
+        padding: 10px;
+        transition: background-color 0.1s linear;
+      }
+      .control:hover,
+      .option:hover {
+        background-color: rgb(226, 226, 226);
+        color: black;
+      }
+      #adjust {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      #adjust div {
+        display: flex;
+        justify-content: space-between;
+      }
+      #adjust div input {
+        width: 100%;
+        accent-color: navy;
+      }
+      .container #editor #editorleft,
+      #editor #editorright {
+        border: 1px solid black;
+        padding: 20px;
+      }
+      #editorright {
+        padding: 0px;
+        width: max-content;
+        flex-grow: 1.5;
+        max-width: 400px;
+        max-height: 275px;
+      }
+      #options {
+        display: flex;
+        gap: 10px;
+      }
+      #options div {
+        padding: 5px;
+        aspect-ratio: 1;
+        flex-grow: 1;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+      }
+
+      #resetoptions {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      #resetoptions div {
+        display: flex;
+      }
+      #resetoptions div:nth-child(2) {
+        justify-content: space-between;
+        flex-grow: 0;
+        gap: 5px;
+      }
+      #resetoptions div button {
+        all: unset;
+        display: flex;
+        justify-content: center;
+        background-color: white;
+        border: 1px solid black;
+        padding: 5px;
+      }
+      #resetoptions div:nth-child(1) button {
+        flex-grow: 1;
+      }
+
+      .active {
+        background-color: navy;
+        color: white;
+        transition: background-color 0.1s linear;
+      }
+      .active:hover {
+        background-color: black;
+        color: white;
+      }
+      @media (width < 480px) {
+        .container {
+          min-width: 320px;
+        }
+        #resetoptions div:nth-child(1) {
+          flex-grow: 1;
+        }
+        #resetoptions div:nth-child(2) {
+          flex-grow: 1;
+        }
+        #resetoptions div:nth-child(2) button {
+          flex-grow: 1;
+        }
+      }
+      @media (width > 740px) {
+        #editorright {
+          width: fit-content;
+          height: 300px;
+        }
+      }
+      @media (max-width: 740px) {
+        .container #editor {
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto;
+        }
+        #editorright {
+          grid-row: 1;
+          grid-column: 1/2;
+          width: min-content;
+          min-width: 100%;
+          width: 100%;
+        }
+        #editorleft {
+          grid-row: 2;
+          grid-column: 1/2;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+        <div>
+          <h3>Easy Image Editor</h3>
+        </div>
+        <div id="editor">
+          <div id="editorleft">
+            <div>
+              <h4>Filters</h4>
+            </div>
+            <div id="controls">
+              <div class="control brightness active">Brightness</div>
+              <div class="control saturation">Saturation</div>
+              <div class="control inversion">Inversion</div>
+              <div class="control grayscale">Grayscale</div>
+            </div>
+            <div id="adjust">
+              <div>
+                <h4>Brightness</h4>
+                <h4>0</h4>
+              </div>
+              <div>
+                <input type="range" step="1" min="-100" max="100" value="0" />
+              </div>
+            </div>
+            <div id="options">
+              <div class="option">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M6.56 7.98C6.1 7.52 5.31 7.6 5 8.17c-.28.51-.5 1.03-.67 1.58c-.19.63.31 1.25.96 1.25h.01c.43 0 .82-.28.94-.7q.18-.6.48-1.17c.22-.37.15-.84-.16-1.15M5.31 13h-.02c-.65 0-1.15.62-.96 1.25c.16.54.38 1.07.66 1.58c.31.57 1.11.66 1.57.2c.3-.31.38-.77.17-1.15c-.2-.37-.36-.76-.48-1.16a.97.97 0 0 0-.94-.72m2.85 6.02q.765.42 1.59.66c.62.18 1.24-.32 1.24-.96v-.03c0-.43-.28-.82-.7-.94c-.4-.12-.78-.28-1.15-.48a.97.97 0 0 0-1.16.17l-.03.03c-.45.45-.36 1.24.21 1.55M13 4.07v-.66c0-.89-1.08-1.34-1.71-.71L9.17 4.83c-.4.4-.4 1.04 0 1.43l2.13 2.08c.63.62 1.7.17 1.7-.72V6.09c2.84.48 5 2.94 5 5.91c0 2.73-1.82 5.02-4.32 5.75a.97.97 0 0 0-.68.94v.02c0 .65.61 1.14 1.23.96A7.976 7.976 0 0 0 20 12c0-4.08-3.05-7.44-7-7.93"
+                  />
+                </svg>
+              </div>
+              <div class="option">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M14.83 4.83L12.7 2.7c-.62-.62-1.7-.18-1.7.71v.66C7.06 4.56 4 7.92 4 12c0 3.64 2.43 6.71 5.77 7.68c.62.18 1.23-.32 1.23-.96v-.03a.97.97 0 0 0-.68-.94A5.98 5.98 0 0 1 6 12c0-2.97 2.16-5.43 5-5.91v1.53c0 .89 1.07 1.33 1.7.71l2.13-2.08a.99.99 0 0 0 0-1.42m4.84 4.93q-.24-.825-.66-1.59c-.31-.57-1.1-.66-1.56-.2l-.01.01c-.31.31-.38.78-.17 1.16c.2.37.36.76.48 1.16c.12.42.51.7.94.7h.02c.65 0 1.15-.62.96-1.24M13 18.68v.02c0 .65.62 1.14 1.24.96q.825-.24 1.59-.66c.57-.31.66-1.1.2-1.56l-.02-.02a.97.97 0 0 0-1.16-.17c-.37.21-.76.37-1.16.49c-.41.12-.69.51-.69.94m4.44-2.65c.46.46 1.25.37 1.56-.2c.28-.51.5-1.04.67-1.59c.18-.62-.31-1.24-.96-1.24h-.02c-.44 0-.82.28-.94.7q-.18.6-.48 1.17c-.21.38-.13.86.17 1.16"
+                  />
+                </svg>
+              </div>
+              <div class="option">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="m2.853.854l3.793 3.792a.5.5 0 0 0 .708 0L11.146.854A.5.5 0 0 0 10.793 0H3.207a.5.5 0 0 0-.353.854Zm0 12.292l3.793-3.793a.5.5 0 0 1 .708 0l3.792 3.793a.5.5 0 0 1-.353.854H3.207a.5.5 0 0 1-.353-.854ZM1.75 7.75h-1a.75.75 0 0 1 0-1.5h1a.75.75 0 1 1 0 1.5m2.833 0h1a.75.75 0 1 0 0-1.5h-1a.75.75 0 0 0 0 1.5m4.834 0h-1a.75.75 0 1 1 0-1.5h1a.75.75 0 0 1 0 1.5m2.833 0h1a.75.75 0 0 0 0-1.5h-1a.75.75 0 0 0 0 1.5"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div class="option">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="m2.853.854l3.793 3.792a.5.5 0 0 0 .708 0L11.146.854A.5.5 0 0 0 10.793 0H3.207a.5.5 0 0 0-.353.854Zm0 12.292l3.793-3.793a.5.5 0 0 1 .708 0l3.792 3.793a.5.5 0 0 1-.353.854H3.207a.5.5 0 0 1-.353-.854ZM1.75 7.75h-1a.75.75 0 0 1 0-1.5h1a.75.75 0 1 1 0 1.5m2.833 0h1a.75.75 0 1 0 0-1.5h-1a.75.75 0 0 0 0 1.5m4.834 0h-1a.75.75 0 1 1 0-1.5h1a.75.75 0 0 1 0 1.5m2.833 0h1a.75.75 0 0 0 0-1.5h-1a.75.75 0 0 0 0 1.5"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div id="editorright">
+            <canvas id="image"></canvas>
+          </div>
+        </div>
+        <div id="resetoptions">
+          <div id="resetFilter">
+            <button>RESET FILTERS</button>
+          </div>
+          <div>
+            <button id="chooseImage">CHOOSE IMAGE</button>
+            <button>SAVE IMAGE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let canvas = document.querySelector("#image");
+      let Brightnessbtn = document.querySelector("#brightness");
+      let Saturationbtn = document.querySelector("#saturation");
+      let Inversionbtn = document.querySelector("#inversion");
+      let Grayscalebtn = document.querySelector("#grayscale");
+
+      let chooseimage = document.querySelector("#chooseImage");
+      let currentImageUrl = "https://images.pexels.com/photos/5499910/pexels-photo-5499910.jpeg?auto=compress&cs=tinysrgb&w=300";
+
+      let resetFilter = document.querySelector("#resetFilter");
+
+      let controls = document.querySelectorAll(".control");
+
+      let slider = document.querySelector("#adjust > div > input");
+      let selectedfilterElem =
+        document.querySelectorAll("#adjust > div > h4")[0];
+      let percentage = document.querySelectorAll("#adjust > div > h4")[1];
+
+      let currentFilter = "Brightness";
+      let debounceTimeout;
+
+      let c = canvas.getContext("2d");
+      let img = document.createElement("img");
+      img.crossOrigin = "anonymous";
+      img.src = currentImageUrl;
+        
+      img.onload = function () {
+        addImage(img);
+      };
+      let imageData;
+
+      function addImage(img) {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        c.drawImage(img, 0, 0);
+        imageData = getData();
+      }
+
+      function changeGrayscale(data, val) {
+        const factor = (Number(val) + 100) / 100;
+        let newData = new ImageData(
+          new Uint8ClampedArray(data.data),
+          data.width,
+          data.height
+        );
+
+        for (let i = 0; i < newData.data.length; i += 4) {
+          const gray =
+            0.299 * newData.data[i] +
+            0.587 * newData.data[i + 1] +
+            0.114 * newData.data[i + 2];
+          newData.data[i] = gray * (1 - factor) + newData.data[i] * factor;
+          newData.data[i + 1] =
+            gray * (1 - factor) + newData.data[i + 1] * factor;
+          newData.data[i + 2] =
+            gray * (1 - factor) + newData.data[i + 2] * factor;
+          newData.data[i + 3] = data.data[i + 3];
+        }
+        return newData;
+      }
+
+      function changeSaturation(data, val) {
+        const saturationFactor = (Number(val) + 100) / 100;
+        let newData = new ImageData(
+          new Uint8ClampedArray(data.data),
+          data.width,
+          data.height
+        );
+
+        for (let i = 0; i < newData.data.length; i += 4) {
+          const gray =
+            0.299 * newData.data[i] +
+            0.587 * newData.data[i + 1] +
+            0.114 * newData.data[i + 2];
+          const newR = gray + (newData.data[i] - gray) * saturationFactor;
+          const newG = gray + (newData.data[i + 1] - gray) * saturationFactor;
+          const newB = gray + (newData.data[i + 2] - gray) * saturationFactor;
+          newData.data[i] = Math.min(255, Math.max(0, newR));
+          newData.data[i + 1] = Math.min(255, Math.max(0, newB));
+          newData.data[i + 2] = Math.min(255, Math.max(0, newG));
+        }
+        return newData;
+      }
+
+      function changeBrigness(data, val) {
+        val /= 1.2;
+        let newData = new ImageData(
+          new Uint8ClampedArray(data.data),
+          data.width,
+          data.height
+        );
+
+        for (let i = 0; i < newData.data.length; i += 4) {
+          newData.data[i] = Math.min(255, Math.max(0, newData.data[i] + val));
+          newData.data[i + 1] = Math.min(
+            255,
+            Math.max(0, newData.data[i + 1] + val)
+          );
+          newData.data[i + 2] = Math.min(
+            255,
+            Math.max(0, newData.data[i + 2] + val)
+          );
+        }
+        return newData;
+      }
+
+      function changeInversion(data, val) {
+        val = Math.abs(val);
+        const factor = Number(val) / 100;
+        let newData = new ImageData(
+          new Uint8ClampedArray(data.data),
+          data.width,
+          data.height
+        );
+        console.log(factor);
+        for (let i = 0; i < newData.data.length; i += 4) {
+          newData.data[i] = newData.data[i] + (255 * factor - newData.data[i]);
+          newData.data[i] =
+            newData.data[i + 2] + (255 * factor - newData.data[i + 1]);
+          newData.data[i] =
+            newData.data[i + 3] + (255 * factor - newData.data[i + 3]);
+        }
+        return newData;
+      }
+
+      controls.forEach((item, i) => {
+        item.addEventListener("click", (e) => {
+            slider.value = 0;
+            percentage.innerText = slider.value
+          e.target.classList.cont;
+          currentFilter = e.target.innerText;
+          imageData = getData();
+          document.querySelector(".active").classList.toggle("active");
+          e.target.classList.add("active");
+          selectedfilterElem.innerText = currentFilter;
+        });
+      });
+
+      function getData() {
+        return c.getImageData(0, 0, canvas.width, canvas.height);
+      }
+
+      slider.addEventListener("input", (e) => {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+          let changedData;
+          if (currentFilter == "Brightness") {
+            changedData = changeBrigness(imageData, e.target.value);
+          } else if (currentFilter == "Saturation") {
+            changedData = changeSaturation(imageData, e.target.value);
+          } else if (currentFilter == "Grayscale") {
+            changedData = changeGrayscale(imageData, e.target.value);
+          } else {
+            changedData = changeInversion(imageData, e.target.value);
+          }
+          changeSaturation(imageData, e.target.value);
+          c.clearRect(0, 0, canvas.width, canvas.height);
+          c.putImageData(changedData, 0, 0);
+        }, 200);
+        percentage.innerText = e.target.value;
+      });
+
+      chooseimage.addEventListener("click", (e) => {
+        e.stopPropagation();
+        var input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image";
+        input.click();
+        input.addEventListener("change", (e) => {
+          let file = e.target.files[0];
+          if (file) {
+            currentImageUrl = URL.createObjectURL(file);
+            let img = document.createElement("img");
+            img.src = currentImageUrl;
+            img.crossOrigin = "anonymous"
+            img.onload = () => {
+              addImage(img);
+              img.remove();
+              input.remove();
+            };
+          }
+          console.table(e.target.files);
+        });
+      });
+
+      resetFilter.addEventListener("click", () => {
+        let img = document.createElement("img");
+        console.log(currentImageUrl)
+        img.src = currentImageUrl;
+        img.crossOrigin = "anonymous"
+        img.onload = () => {
+          addImage(img);
+          img.remove();
+        };
+      });
+    </script>
+  </body>
+</html>

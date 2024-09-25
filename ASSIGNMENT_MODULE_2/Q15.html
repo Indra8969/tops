@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      .container {
+        height: 100dvh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        background-color: rgb(168, 79, 94);
+      }
+      .card {
+        max-width: 300px;
+        background-color: white;
+        border-radius: 3px;
+        margin-inline: auto;
+      }
+      .card form {
+        padding: 20px;
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
+      .card form div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+      }
+      .card form div:nth-child(1) h3 {
+        text-align: center;
+      }
+      .card form div input {
+        height: 30px;
+        padding: 0px 10px;
+        border-radius: 0px;
+        border: 1px solid black;
+      }
+      .card form div button {
+        all: unset;
+        width: 100%;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: green;
+        color: white;
+        border-radius: 2px;
+      }
+
+      #logoutbtn {
+        background-color: brown;
+      }
+      #welcometext {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <form>
+          <div>
+            <h3>Login</h3>
+          </div>
+          <div>
+            <label for="username">Username</label>
+            <input type="text" placeholder="Username" required/>
+          </div>
+          <div>
+            <label for="username">Password</label>
+            <input type="text" placeholder="Password" required/>
+          </div>
+          <div>
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      let loginhtml = `
+        <form>
+          <div>
+            <h3>Login</h3>
+          </div>
+          <div>
+            <label for="username">Username</label>
+            <input type="text" placeholder="Username" />
+          </div>
+          <div>
+            <label for="username">Password</label>
+            <input type="text" placeholder="Password" />
+          </div>
+          <div>
+            <button type="submit">Login</button>
+          </div>
+        </form>
+        `;
+      let welcomehtml = `
+      <form>
+          <div>
+            <h3>Welcome</h3>
+          </div>
+          <div>
+            <p id="welcometext">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatem dolor quos facilis impedit adipisci. Voluptatibus
+              officia maiores quasi laborum! Voluptatum optio ducimus omnis
+              beatae tempora mollitia ut atque, sapiente quibusdam?
+            </p>
+          </div>
+          <div>
+            <button id="logoutbtn">Logout</button>
+          </div>
+        </form>
+      `;
+      let islogin = false;
+      let form = document.querySelector("form");
+      let card = document.querySelector(".card");
+      form.addEventListener("submit", () => {
+        if (!islogin) {
+          card.innerHTML = welcomehtml;
+        } else {
+          card.innerHTML = logi;
+        }
+      });
+    </script>
+  </body>
+</html>
