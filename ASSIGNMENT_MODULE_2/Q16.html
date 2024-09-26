@@ -208,7 +208,7 @@
               </div>
             </div>
             <div id="options">
-              <div class="option">
+              <div class="option rotateRight">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="1em"
@@ -221,7 +221,7 @@
                   />
                 </svg>
               </div>
-              <div class="option">
+              <div class="option rotateLeft">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="1em"
@@ -234,7 +234,7 @@
                   />
                 </svg>
               </div>
-              <div class="option">
+              <div class="option flipHor">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="1em"
@@ -249,7 +249,7 @@
                   />
                 </svg>
               </div>
-              <div class="option">
+              <div class="option flipVer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="1em"
@@ -288,31 +288,55 @@
       let Saturationbtn = document.querySelector("#saturation");
       let Inversionbtn = document.querySelector("#inversion");
       let Grayscalebtn = document.querySelector("#grayscale");
-
-      let chooseimage = document.querySelector("#chooseImage");
-      let currentImageUrl = "https://images.pexels.com/photos/5499910/pexels-photo-5499910.jpeg?auto=compress&cs=tinysrgb&w=300";
-
       let resetFilter = document.querySelector("#resetFilter");
-
+      let chooseimage = document.querySelector("#chooseImage");
       let controls = document.querySelectorAll(".control");
-
       let slider = document.querySelector("#adjust > div > input");
+      let options = document.querySelectorAll('.option');
       let selectedfilterElem =
         document.querySelectorAll("#adjust > div > h4")[0];
       let percentage = document.querySelectorAll("#adjust > div > h4")[1];
 
+      let currentImageUrl =
+        "https://images.pexels.com/photos/5499910/pexels-photo-5499910.jpeg?auto=compress&cs=tinysrgb&w=300";
+
       let currentFilter = "Brightness";
       let debounceTimeout;
+      let currentRotated = 0;
 
       let c = canvas.getContext("2d");
       let img = document.createElement("img");
       img.crossOrigin = "anonymous";
       img.src = currentImageUrl;
-        
+
       img.onload = function () {
         addImage(img);
       };
       let imageData;
+
+      function flipImage(direction) {
+        const x = canvas.width / 2;
+        const y = canvas.height / 2;
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        c.translate(x, y);
+        if(direction == "horizontal"){
+          c.scale(-1,1);
+        }else{
+          c.scale(1,-1);
+        }
+        c.drawImage(img, -img.width / 2, -img.height / 2);
+        c.setTransform(1, 0, 0, 1, 0, 0);
+      }
+
+      function rotateImage(deg) {
+        const x = canvas.width / 2;
+        const y = canvas.height / 2;
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        c.translate(x, y);
+        c.rotate((deg * Math.PI) / 180);
+        c.drawImage(img, -img.width / 2, -img.height / 2);
+        c.setTransform(1, 0, 0, 1, 0, 0);
+      }
 
       function addImage(img) {
         canvas.width = img.width;
@@ -408,10 +432,14 @@
         return newData;
       }
 
+      resetFilter.addEventListener("click", () => {
+        addImage(currentImageUrl);
+      });
+
       controls.forEach((item, i) => {
         item.addEventListener("click", (e) => {
-            slider.value = 0;
-            percentage.innerText = slider.value
+          slider.value = 0;
+          percentage.innerText = slider.value;
           e.target.classList.cont;
           currentFilter = e.target.innerText;
           imageData = getData();
@@ -424,6 +452,22 @@
       function getData() {
         return c.getImageData(0, 0, canvas.width, canvas.height);
       }
+
+      options.forEach((item,i)=>{
+        item.addEventListener("click",()=>{
+          if(i == 0){
+            currentRotated -= 90;
+            rotateImage(currentRotated);
+          }else if(i == 1){
+            currentRotated += 90;
+            rotateImage(currentRotated);
+          }else if(i == 2){
+            flipImage("horizontal");
+          }else{
+            flipImage("vertical");
+          }
+        })
+      })
 
       slider.addEventListener("input", (e) => {
         clearTimeout(debounceTimeout);
@@ -455,9 +499,8 @@
           let file = e.target.files[0];
           if (file) {
             currentImageUrl = URL.createObjectURL(file);
-            let img = document.createElement("img");
             img.src = currentImageUrl;
-            img.crossOrigin = "anonymous"
+            img.crossOrigin = "anonymous";
             img.onload = () => {
               addImage(img);
               img.remove();
@@ -470,9 +513,9 @@
 
       resetFilter.addEventListener("click", () => {
         let img = document.createElement("img");
-        console.log(currentImageUrl)
+        console.log(currentImageUrl);
         img.src = currentImageUrl;
-        img.crossOrigin = "anonymous"
+        img.crossOrigin = "anonymous";
         img.onload = () => {
           addImage(img);
           img.remove();
