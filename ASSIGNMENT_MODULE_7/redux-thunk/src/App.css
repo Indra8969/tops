@@ -1,0 +1,84 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.home{
+    max-width: 1000px;
+    margin-inline: auto;
+}
+#home-to-register {
+  padding: 20px;
+}
+#home-to-register > a {
+  background-color: seagreen;
+  padding: 10px;
+  color: white;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.table {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 500px;
+  margin-inline: auto;
+}
+.thead{
+    background-color: navy;
+    color: white;
+}
+.thead,
+.trow {
+  display: flex;
+  width: 100%;
+}
+
+.tcell,
+.tcell {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.tcell {
+  flex: 0;
+  min-width: 20%;
+  overflow-x: auto;
+  text-align: center;
+}
+.tcell > button {
+  all: unset;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+.tcell > button:nth-child(1) {
+  margin-left: auto;
+  background-color: brown;
+  color: white;
+}
+.tcell > button:nth-child(2) {
+  margin-right: auto;
+  background-color: seagreen;
+  color: white;
+}
+.trow > .tcell:nth-child(5) {
+  display: flex;
+  gap: 5px;
+}
+.tcell::-webkit-scrollbar {
+  height: 5px;
+}
+.tcell::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+}
+.thead {
+  font-weight: bold;
+}
+
+.trow:nth-child(2n-1) {
+  background-color: #f0f0f0;
+}

@@ -1,0 +1,85 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+:root{
+    --bg-main:rgb(99, 99, 99);
+    --bg-two: grey;
+    --color: white;
+    --grad-one: rgb(51,21,7);
+    --grad-two: black;
+}
+.white{
+    --bg-main: white;
+    --bg-two: rgb(202, 202, 202);
+    --color: black;
+    --grad-one: rgb(148, 180, 218);
+    --grad-two: rgb(70, 95, 148);
+}
+.home, .skills, .projects, .about{
+    min-height: 100dvh;
+    background: linear-gradient(90deg, var(--grad-one), var(--grad-two));
+    color: white;
+    display: flex;
+    padding: 150px 20px;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+.skills ul{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 10px;
+}
+.skills h4 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+p{
+    max-width: 75ch;
+    margin-inline: auto;
+    color: var(--bg-op);
+}
+.home > div{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+.home > div > button{
+    all: unset;
+    background-color: var(--bg-main);
+    color: var(--color);
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: var();
+}
+.header{
+    padding: 10px 10px 10px 30px;
+    border-radius: 50px;
+    border: 5px solid grey;
+    position: fixed;
+    top: 75px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--bg-main);
+}
+.header > nav{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.header > nav > div > a{
+    text-wrap: nowrap;
+    color: var(--color);
+    text-decoration: none;
+}
+nav button{
+    all: unset;
+    color: white;
+    background-color: rgb(99, 99, 99);
+    padding: 10px 20px;
+    border-radius: 30px;
+}

@@ -1,0 +1,16 @@
+{
+    "users" : [
+        {
+            "name": "suthar indra",
+            "Email" : "sutharindar@gmail.com",
+            "contact" : 92840938,
+            "Address": "Ahmedabad"
+        },
+        {
+            "name": "jeet solanki",
+            "Email" : "jeet@gmail.com",
+            "contact" : 9892839,
+            "Address": "Delhi"
+        }
+    ]
+}
